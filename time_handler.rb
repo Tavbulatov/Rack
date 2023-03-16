@@ -9,7 +9,6 @@ class TimeHandler
     @path_info = path_info
     @request = request['format']&.split(',')
     @ripe_format_time = []
-    @requested_format = []
     @unknown_format = []
     @status = 0
     processing_request
@@ -21,13 +20,11 @@ class TimeHandler
 
     @request.each do |format|
       if FORMAT[format.to_sym]
-        @requested_format << FORMAT[format.to_sym]
+        @ripe_format_time[FORMAT.values.index(FORMAT[format.to_sym])] = FORMAT[format.to_sym]
       else
         @unknown_format << format
       end
     end
-
-    @requested_format.each { |format| @ripe_format_time[FORMAT.values.index(format)] = format }
   end
 
   def result
@@ -36,8 +33,8 @@ class TimeHandler
       time_now
     else
       @status = 400
-      return "Unknown time format #{@unknown_format}" unless @unknown_format.empty?
       return 'Not found' unless @path_info == '/time'
+      return "Unknown time format #{@unknown_format}" unless @unknown_format.empty?
     end
   end
 
