@@ -3,16 +3,13 @@ class TimeHandler
              year: '-%Y', hour: ' %H',
              minute: ':%M', second: ':%S' }
 
-  attr_reader :status
+  attr_reader :unknown_format
 
-  def initialize(request, path_info)
-    @path_info = path_info
+  def initialize(request)
     @request = request['format']&.split(',')
     @ripe_format_time = []
     @unknown_format = []
-    @status = 0
     processing_request
-    result
   end
 
   def processing_request
@@ -24,17 +21,6 @@ class TimeHandler
       else
         @unknown_format << format
       end
-    end
-  end
-
-  def result
-    if @path_info == '/time' && @unknown_format.empty?
-      @status = 200
-      time_now
-    else
-      @status = 400
-      return 'Not found' unless @path_info == '/time'
-      return "Unknown time format #{@unknown_format}" unless @unknown_format.empty?
     end
   end
 
