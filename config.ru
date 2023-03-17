@@ -1,5 +1,4 @@
 require_relative 'application'
-require_relative 'time_handler'
 
 ROUTES = { '/time' => Application.new }
 
