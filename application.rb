@@ -13,7 +13,7 @@ class Application
     if time.unknown_format.any?
       rack_responce.status = 400
       rack_responce.body = ["Unknown time format #{time.unknown_format}"]
-    elsif time.unknown_format.empty?
+    else
       rack_responce.status = 200
       rack_responce.body = [time.time_now]
     end
