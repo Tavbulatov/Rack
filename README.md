@@ -1,7 +1,11 @@
 "Rack" - интерфейс который возвращает время в заданном формате в строке запросе.
 
 В директории проета выполните команду 'rackup'
-Далее выполните запрос пример: 'curl --url "http://localhost:9292/time?format=year%2Cmonth%2Cday" -i'
+
+Выберите нужные элементы времени: day, month, year, hour, minute, second
+Далее выполните запрос.
+
+пример: 'curl --url "http://localhost:9292/time?format=year%2Cmonth%2Cday" -i'
 
 Вернет:
 
